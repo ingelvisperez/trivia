@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:14
+    container_name: tala_db
+    environment:
+      POSTGRES_USER: tala
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: talatrivia   
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
