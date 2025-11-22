@@ -3,27 +3,17 @@
 
 ## Descripción del Proyecto
 
-**TalaTrivia** es una API REST desarrollada con **FastAPI**, PostgreSQL y SQLAlchemy, diseñada para administrar trivias de conocimiento, permitiendo:
+TalaTrivia es una API REST desarrollada con FastAPI, PostgreSQL y SQLAlchemy, diseñada para gestionar trivias de conocimiento. El sistema permite administrar usuarios, preguntas, trivias, participaciones y rankings de forma estructurada y eficiente. La aplicación está completamente dockerizada, permitiendo ejecutar tanto la base de datos como la API mediante Docker Compose.
 
-- Registro de usuarios  
-- Gestión de preguntas  
-- Creación de trivias  
-- Jugar trivias  
-- Registrar participaciones  
-- Generar ranking  
+## Diagrama de Arquitectura
 
----
-
-# 🏗️ Diagrama de Arquitectura
 ```mermaid
 graph TD
     C[Cliente Frontend] --> A[FastAPI API]
     A --> B[PostgreSQL DB]
-
 ```
----
 
-# 🎬 Diagrama de Secuencia – Flujo “Jugar Trivia”
+## Diagrama de Secuencia – Flujo Jugar Trivia
 
 ```mermaid
 sequenceDiagram
@@ -36,7 +26,7 @@ sequenceDiagram
     DB-->>API: OK
     API->>DB: Obtener preguntas
     DB-->>API: Preguntas
-    API-->>U: Preguntas (sin respuestas correctas)
+    API-->>U: Preguntas sin respuestas correctas
 
     U->>API: POST /trivias/{id}/answer
     API->>DB: Obtener preguntas
@@ -47,9 +37,7 @@ sequenceDiagram
     API-->>U: Score final
 ```
 
----
-
-# 🗂️ Diagrama ER (Entidad–Relación)
+## Diagrama ER
 
 ```mermaid
 erDiagram
@@ -103,9 +91,7 @@ erDiagram
     TRIVIA ||--o{ PARTICIPATION : registra
 ```
 
----
-
-# 🧩 Diagrama de Componentes
+## Diagrama de Componentes
 
 ```mermaid
 graph LR
@@ -138,24 +124,20 @@ graph LR
     SC --> R3
 ```
 
----
+## Tecnologías Utilizadas
 
-# ⚙️ Tecnologías Utilizadas
+- Python 3.12 o superior  
+- FastAPI  
+- Uvicorn  
+- SQLAlchemy ORM  
+- PostgreSQL 14  
+- Docker y Docker Compose  
+- Pydantic v2  
+- JSONB  
 
-- Python 3.12+
-- FastAPI
-- Uvicorn
-- SQLAlchemy ORM
-- PostgreSQL 14
-- Docker & Docker Compose
-- Pydantic v2
-- JSONB
+## Estructura del Proyecto
 
----
-
-# 📂 Estructura del Proyecto
-
-```text
+```
 app/
 ├── main.py
 ├── database.py
@@ -183,17 +165,29 @@ app/
     └── scoring_service.py
 ```
 
----
+## Ejecución con Docker
 
-# 🐳 Cómo levantar PostgreSQL con Docker
+El proyecto está completamente dockerizado. Para construir y ejecutar la API y la base de datos:
 
 ```bash
-docker-compose up -d
+docker-compose up -d --build
 ```
 
----
+Para ver logs:
 
-# ▶️ Ejecutar API en Local
+```bash
+docker-compose logs -f api
+```
+
+Swagger UI disponible en:
+
+```
+http://localhost:8000/docs
+```
+
+## Ejecución en Local
+
+Como alternativa, la API puede ejecutarse sin Docker:
 
 ```bash
 python -m venv venv
@@ -202,20 +196,14 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-Swagger 👉 http://127.0.0.1:8000/docs
+## Endpoints Principales
 
----
+- /users  
+- /questions  
+- /trivias  
+- /ranking  
 
-# 📌 Endpoints
+## Autor
 
-- `/users`
-- `/questions`
-- `/trivias`
-- `/ranking`
-
----
-
-# 🧠 Autor
-
-**Elvis Pérez**  
-Backend Developer  
+Elvis Pérez  
+Backend Developer
