@@ -35,7 +35,7 @@ def calculate_score(
             total_score += points
             correct += 1
         else:
-            # si respondió mal o no respondió, la contamos como incorrecta
+            # si respondió mal o no respondió, se cuenta como incorrecta
             wrong += 1
 
     return total_score, max_score, correct, wrong

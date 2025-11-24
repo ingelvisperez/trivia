@@ -31,7 +31,7 @@ router = APIRouter()
 
 @router.post("/", response_model=TriviaRead, status_code=status.HTTP_201_CREATED)
 def create_trivia(trivia_in: TriviaCreate, db: Session = Depends(get_db)):
-    # Validar preguntas existentes
+    # Validación de preguntas existentes en la trivia
     if not trivia_in.question_ids:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -49,7 +49,7 @@ def create_trivia(trivia_in: TriviaCreate, db: Session = Depends(get_db)):
             detail="Una o más preguntas no existen.",
         )
 
-    # Validar usuarios (si se enviaron)
+    # Validación de usuarios
     users = []
     if trivia_in.user_ids:
         users = (
@@ -69,8 +69,7 @@ def create_trivia(trivia_in: TriviaCreate, db: Session = Depends(get_db)):
         description=trivia_in.description,
     )
     db.add(trivia)
-    db.flush()  # obtenemos trivia.id sin hacer commit aún
-
+    db.flush()  
     # Asociar preguntas a la trivia
     for order, q_id in enumerate(trivia_in.question_ids):
         tq = TriviaQuestion(
@@ -123,7 +122,7 @@ def get_trivia(trivia_id: int, db: Session = Depends(get_db)):
         id=trivia.id,
         name=trivia.name,
         description=trivia.description,
-        questions=questions,  # Pydantic lo convertirá a QuestionRead gracias a orm_mode
+        questions=questions,
     )
 
 
@@ -141,7 +140,7 @@ def play_trivia(trivia_id: int, user_id: int, db: Session = Depends(get_db)):
             detail="Trivia no encontrada.",
         )
 
-    # Verificar que el usuario tenga esta trivia asignada
+    # Verificación que el usuario tenga esta trivia asignada
     assignment = (
         db.query(TriviaAssignment)
         .filter(

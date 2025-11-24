@@ -19,7 +19,7 @@ def get_ranking(trivia_id: int, db: Session = Depends(get_db)):
     Devuelve el ranking de usuarios para una trivia específica,
     ordenado por puntaje de mayor a menor.
     """
-    # Validar que la trivia exista
+    # Validación que la trivia exista
     trivia = db.query(Trivia).filter(Trivia.id == trivia_id).first()
     if not trivia:
         raise HTTPException(

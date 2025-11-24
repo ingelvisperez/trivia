@@ -12,7 +12,7 @@ class TriviaQuestion(Base):
     trivia_id = Column(Integer, ForeignKey("trivias.id", ondelete="CASCADE"), nullable=False)
     question_id = Column(Integer, ForeignKey("questions.id", ondelete="CASCADE"), nullable=False)
 
-    # opcional: para mantener el orden de las preguntas
+    # Para mantener el orden de las preguntas
     order = Column(Integer, nullable=True)
 
     trivia = relationship("Trivia", back_populates="questions")

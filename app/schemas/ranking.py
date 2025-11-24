@@ -7,6 +7,6 @@ class RankingEntry(BaseModel):
     user_id: int
     user_name: str
     score: int
-    created_at: datetime   # NUEVO
+    created_at: datetime 
 
     model_config = ConfigDict(from_attributes=True)

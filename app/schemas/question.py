@@ -8,7 +8,7 @@ class QuestionBase(BaseModel):
     text: str
     difficulty: DifficultyEnum
     options: List[str]
-    correct_option: str  # texto o índice, pero consistente
+    correct_option: str 
 
 
 class QuestionCreate(QuestionBase):
@@ -20,5 +20,4 @@ class QuestionRead(QuestionBase):
     """Esquema para devolver preguntas (response)."""
     id: int
 
-    # Pydantic v2 -> equivalente moderno de orm_mode = True
     model_config = ConfigDict(from_attributes=True)

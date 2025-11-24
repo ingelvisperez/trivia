@@ -13,7 +13,7 @@ router = APIRouter()
 
 @router.post("/", response_model=UserRead, status_code=status.HTTP_201_CREATED)
 def create_user(user_in: UserCreate, db: Session = Depends(get_db)):
-    # Validar que el email no esté repetido
+    # Validación que el email no esté repetido
     existing = db.query(User).filter(User.email == user_in.email).first()
     if existing:
         raise HTTPException(
@@ -60,5 +60,4 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
 
     db.delete(user)
     db.commit()
-    # 204 No Content → no devolvemos body
     return

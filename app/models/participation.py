@@ -15,7 +15,6 @@ class Participation(Base):
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     trivia_id = Column(Integer, ForeignKey("trivias.id", ondelete="CASCADE"), nullable=False)
 
-    # respuestas del usuario, por ejemplo: {"1": "0", "5": "2"}
     answers = Column(JSONB, nullable=False)
 
     score = Column(Integer, nullable=False)

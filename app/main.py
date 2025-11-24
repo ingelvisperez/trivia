@@ -4,8 +4,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database import Base, engine
 from app.models import user, question, trivia, trivia_question, trivia_assignment, participation
 
-# Cuando arrancas en desarrollo, puedes crear las tablas automáticamente.
-# En un entorno productivo lo ideal es usar Alembic para migraciones.
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -14,7 +12,7 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# Configuración básica de CORS (puedes ajustarla según tu necesidad)
+# Configuración básica de CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # en producción, restringir a dominios específicos

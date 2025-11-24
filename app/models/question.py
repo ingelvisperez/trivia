@@ -22,10 +22,9 @@ class Question(Base):
     # dificultad: easy | medium | hard
     difficulty = Column(Enum(DifficultyEnum), nullable=False)
 
-    # opciones: array / lista de strings (guardado como JSONB en Postgres)
+    # guardado como JSONB en Postgres
     options = Column(JSONB, nullable=False)
 
-    # podemos guardar el índice de la opción correcta o el texto
     correct_option = Column(String, nullable=False)
 
     trivias = relationship("TriviaQuestion", back_populates="question")

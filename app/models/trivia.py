@@ -12,7 +12,7 @@ class Trivia(Base):
     name = Column(String(150), nullable=False)
     description = Column(String, nullable=True)
 
-    # relaciones many-to-many con preguntas y usuarios (vía tablas puente)
+    # relaciones many-to-many con preguntas y usuarios
     questions = relationship("TriviaQuestion", back_populates="trivia")
     assignments = relationship("TriviaAssignment", back_populates="trivia")
     participations = relationship("Participation", back_populates="trivia")
